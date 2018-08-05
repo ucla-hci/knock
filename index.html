@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Knock</title>
+</head>
+
+<body>
+    <!-- css -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="style.css">
+
+    <!-- overall ui layout -->
+    <table class="knock-main-table" border="0">
+        <tr>
+            <td>
+                <div id="divCtlrs" align="center">
+                    <label for="rbTrain">Train</label>
+                    <input type="radio" name="rbsMode" id="rbTrain" value="0">
+                    <label for="rbTest">Test</label>
+                    <input type="radio" name="rbsMode" id="rbTest" value="1">
+                    <label for="rbDemo">Demo</label>
+                    <input type="radio" name="rbsMode" id="rbDemo" value="2">
+                </div>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr id="ctrlTrain">
+            <td>
+                <select name="fingerPart" id="selFingerPart">
+                    <option value="0">Pad</option>
+                    <option value="1">Knuckle</option>
+                </select>
+                <div id="btnPrintAll">Print All</div>
+            </td>
+        </tr>
+        <tr id="trCanvas">
+            <td id="tdCanvas">
+            </td>
+        </tr>
+    </table>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- 3rd party libs -->
+    <script type="text/javascript" src="lib/yaml.min.js"></script>
+
+    <!-- my own code -->
+    <script type="text/javascript" src="src/knock.main.js"></script>
+    <script type="text/javascript" src="src/knock.log.js"></script>
+    <script type="text/javascript" src="src/knock.recognizer.js"></script>
+    <script type="text/javascript" src="src/demo.fileexplorer.js"></script>
+</body>
+
+</html>
