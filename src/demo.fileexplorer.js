@@ -15,8 +15,8 @@ DEMO.FileExplorer = function(container) {
   // generate icons of files
   this.ICONFILE = "&#128196;";
   var numFiles = 1; // ((1 + Math.random()) / 2) * 16;
-  var positionInfo = explorer[0].getBoundingClientRect();
-  explorer.empty();
+  var positionInfo = this.explorer[0].getBoundingClientRect();
+  this.explorer.empty();
   for (var i = 0; i < numFiles; i++) {
     var lbFile = $("<label/>");
     lbFile.html(this.ICONFILE);
@@ -36,17 +36,17 @@ DEMO.FileExplorer = function(container) {
 
     this.setupFile(lbFile);
 
-    explorer.append(lbFile);
+    this.explorer.append(lbFile);
   }
 
   // touch events for explorer
-  explorer.on("touchstart", this.explorerTouchStart.bind(this));
-  explorer.on("touchmove", this.explorerTouchMove.bind(this));
-  explorer.on("touchend", this.explorerTouchEnd.bind(this));
+  this.explorer.on("touchstart", this.explorerTouchStart.bind(this));
+  this.explorer.on("touchmove", this.explorerTouchMove.bind(this));
+  this.explorer.on("touchend", this.explorerTouchEnd.bind(this));
 
   // context menu
   this.contextMenu = this.getContextMenu();
-  explorer.append(this.contextMenu);
+  this.explorer.append(this.contextMenu);
   this.contextMenu.css("position", "absolute");
   this.contextMenuDisabled = false;
   $(".context-menu-button").attr("disabled", true);
@@ -165,9 +165,8 @@ DEMO.FileExplorer.prototype.setupFile = function(lbFile) {
 //
 DEMO.FileExplorer.prototype.getContextMenu = function() {
   var contextMenu = $("<table cellpadding='5'></table>");
-  contextMenu.load(
-    "../assets/contextmenu.html",
-    function() {
+  var promise = new Promise(function(resolve, reject) {
+    contextMenu.load("../assets/contextmenu.html", function() {
       $(this).addClass("xac-context-menu");
       $(this)
         .find("td")
@@ -175,11 +174,14 @@ DEMO.FileExplorer.prototype.getContextMenu = function() {
       $(this)
         .find("td")
         .button();
-    } //.bind(this)
-  );
+      resolve("loaded");
+    });
+  });
 
-  setTimeout(
-    function() {
+  promise.then(
+    function(value) {
+      console.log(value);
+      console.log($("#tdCopy"));
       $("#tdCopy").click(
         function(e) {
           if (!this.contextMenuActive) return;
@@ -223,8 +225,7 @@ DEMO.FileExplorer.prototype.getContextMenu = function() {
           lbFile.fadeOut();
         }.bind(this)
       );
-    }.bind(this),
-    500
+    }.bind(this)
   );
 
   return contextMenu;
