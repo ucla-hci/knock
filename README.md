@@ -26,7 +26,7 @@ To train recognition for pad or knuckle, simply select the corresponding label f
 
 You should see data being spit out in the console.
 
-![safari](assets/screenshot_safari.tiff)
+![safari](assets/screenshot_safari.png)
 
 Pressing the 'Print All' will give you a table of data ready to be saved as ```.csv``` and sent to Weka.
 
